@@ -1,6 +1,7 @@
 package com.bytheface1.todoapp.addtasks.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -87,7 +89,7 @@ fun AddTasksDialog(show: Boolean, onDismiss: () -> Unit, onTaskAdded: (String) -
                     maxLines = 1
                 )
                 Button(onClick = {
-                    if (myTask.isNotBlank()){
+                    if (myTask.isNotBlank()) {
                         onTaskAdded(myTask)
                         myTask = ""
                     }
@@ -115,7 +117,12 @@ fun ItemTask(taskModel: TaskModel, tasksViewModel: TasksViewModel) {
     Card(
         Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .pointerInput(Unit) {
+                 detectTapGestures (onLongPress = {
+                     tasksViewModel.onItemRemove(taskModel)
+                 })
+            },
         elevation = CardDefaults.cardElevation(8.dp)
     ) {
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
