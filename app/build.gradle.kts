@@ -71,9 +71,8 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.44")
 
     // Live Data
-    implementation("androidx.compose.runtime:runtime-livedata:1.5.2")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-
+    implementation("androidx.compose.runtime:runtime-livedata:1.5.2")
 
     // Room
     implementation("androidx.room:room-runtime:2.5.2")
