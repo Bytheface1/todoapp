@@ -34,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -97,6 +98,7 @@ fun AddTasksDialog(show: Boolean, onDismiss: () -> Unit, onTaskAdded: (String) -
                     .fillMaxWidth()
                     .background(Color.White)
                     .padding(16.dp)
+                    .testTag("dialog")
             ) {
                 Text(
                     text = "Add your task",
@@ -108,7 +110,8 @@ fun AddTasksDialog(show: Boolean, onDismiss: () -> Unit, onTaskAdded: (String) -
                     value = myTask,
                     onValueChange = { myTask = it },
                     singleLine = true,
-                    maxLines = 1
+                    maxLines = 1,
+                    modifier = Modifier.testTag("textFieldTask")
                 )
                 Button(onClick = {
                     if (myTask.isNotBlank()) {
